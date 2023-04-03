@@ -3,7 +3,6 @@ import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/add_chat_users/add_chat_users_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -84,7 +83,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
             size: 24.0,
           ),
           onPressed: () async {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         title: Stack(
@@ -113,13 +112,17 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
               child: InkWell(
                 onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddChatUsersWidget(
-                        chat: _chatInfo!.chatRecord,
+                  context.pushNamed(
+                    'addChatUsers',
+                    queryParams: {
+                      'chat': serializeParam(
+                        _chatInfo!.chatRecord,
+                        ParamType.Document,
                       ),
-                    ),
+                    }.withoutNulls,
+                    extra: <String, dynamic>{
+                      'chat': _chatInfo!.chatRecord,
+                    },
                   );
                 },
                 child: Icon(

@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/chat_page/chat_page_widget.dart';
-import '/pages/post_details/post_details_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +80,7 @@ class _ViewProfilePageOtherWidgetState
                 size: 24.0,
               ),
               onPressed: () async {
-                Navigator.pop(context);
+                context.pop();
               },
             ),
             actions: [],
@@ -211,14 +209,18 @@ class _ViewProfilePageOtherWidgetState
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatPageWidget(
-                                          chatUser:
-                                              viewProfilePageOtherUsersRecord,
+                                    context.pushNamed(
+                                      'chatPage',
+                                      queryParams: {
+                                        'chatUser': serializeParam(
+                                          viewProfilePageOtherUsersRecord,
+                                          ParamType.Document,
                                         ),
-                                      ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'chatUser':
+                                            viewProfilePageOtherUsersRecord,
+                                      },
                                     );
                                   },
                                   text: 'mensagem',
@@ -537,18 +539,26 @@ class _ViewProfilePageOtherWidgetState
                                                 ),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PostDetailsWidget(
-                                                          userRecord:
-                                                              userPostUsersRecord,
-                                                          postReference:
-                                                              socialFeedUserPostsRecord
-                                                                  .reference,
+                                                    context.pushNamed(
+                                                      'postDetails',
+                                                      queryParams: {
+                                                        'userRecord':
+                                                            serializeParam(
+                                                          userPostUsersRecord,
+                                                          ParamType.Document,
                                                         ),
-                                                      ),
+                                                        'postReference':
+                                                            serializeParam(
+                                                          socialFeedUserPostsRecord
+                                                              .reference,
+                                                          ParamType
+                                                              .DocumentReference,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'userRecord':
+                                                            userPostUsersRecord,
+                                                      },
                                                     );
                                                   },
                                                   child: Column(

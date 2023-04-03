@@ -8,9 +8,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
-import '/pages/post_details/post_details_widget.dart';
-import '/pages/story_details/story_details_widget.dart';
-import '/pages/view_profile_page_other/view_profile_page_other_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -244,19 +241,23 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     final columnUsersRecord = snapshot.data!;
                                     return InkWell(
                                       onTap: () async {
-                                        await Navigator.push(
-                                          context,
-                                          PageTransition(
-                                            type:
-                                                PageTransitionType.bottomToTop,
-                                            duration:
-                                                Duration(milliseconds: 200),
-                                            reverseDuration:
-                                                Duration(milliseconds: 200),
-                                            child: StoryDetailsWidget(
-                                              initialStoryIndex: listViewIndex,
+                                        context.pushNamed(
+                                          'storyDetails',
+                                          queryParams: {
+                                            'initialStoryIndex': serializeParam(
+                                              listViewIndex,
+                                              ParamType.int,
                                             ),
-                                          ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .bottomToTop,
+                                              duration:
+                                                  Duration(milliseconds: 200),
+                                            ),
+                                          },
                                         );
                                       },
                                       child: Column(
@@ -390,15 +391,21 @@ class _HomePageWidgetState extends State<HomePageWidget>
                               ),
                               child: InkWell(
                                 onTap: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PostDetailsWidget(
-                                        userRecord: userPostUsersRecord,
-                                        postReference:
-                                            socialFeedUserPostsRecord.reference,
+                                  context.pushNamed(
+                                    'postDetails',
+                                    queryParams: {
+                                      'userRecord': serializeParam(
+                                        userPostUsersRecord,
+                                        ParamType.Document,
                                       ),
-                                    ),
+                                      'postReference': serializeParam(
+                                        socialFeedUserPostsRecord.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      'userRecord': userPostUsersRecord,
+                                    },
                                   );
                                 },
                                 child: Column(
@@ -414,15 +421,18 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         children: [
                                           InkWell(
                                             onTap: () async {
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ViewProfilePageOtherWidget(
-                                                    userDetails:
-                                                        userPostUsersRecord,
+                                              context.pushNamed(
+                                                'viewProfilePageOther',
+                                                queryParams: {
+                                                  'userDetails': serializeParam(
+                                                    userPostUsersRecord,
+                                                    ParamType.Document,
                                                   ),
-                                                ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  'userDetails':
+                                                      userPostUsersRecord,
+                                                },
                                               );
                                             },
                                             child: Row(

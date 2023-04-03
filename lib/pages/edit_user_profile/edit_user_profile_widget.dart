@@ -74,7 +74,7 @@ class _EditUserProfileWidgetState extends State<EditUserProfileWidget> {
                 size: 24.0,
               ),
               onPressed: () async {
-                Navigator.pop(context);
+                context.pop();
               },
             ),
             title: Text(
@@ -434,7 +434,7 @@ class _EditUserProfileWidgetState extends State<EditUserProfileWidget> {
                               );
                               await currentUserReference!
                                   .update(usersUpdateData);
-                              Navigator.pop(context);
+                              context.pop();
                             },
                             text: 'Save Changes',
                             options: FFButtonOptions(

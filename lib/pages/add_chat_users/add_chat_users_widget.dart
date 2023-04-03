@@ -64,7 +64,7 @@ class _AddChatUsersWidgetState extends State<AddChatUsersWidget> {
             size: 24.0,
           ),
           onPressed: () async {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         title: Column(
@@ -325,7 +325,7 @@ class _AddChatUsersWidgetState extends State<AddChatUsersWidget> {
                         .map((e) => e.reference)
                         .toList(),
                   );
-                  Navigator.pop(context);
+                  context.pop();
 
                   setState(() {});
                 },

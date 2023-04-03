@@ -68,7 +68,7 @@ class _CreateDogProfileNewWidgetState extends State<CreateDogProfileNewWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              Navigator.pop(context);
+              context.pop();
             },
           ),
         ],
@@ -399,7 +399,7 @@ class _CreateDogProfileNewWidgetState extends State<CreateDogProfileNewWidget> {
                           dogAge: _model.dogAgeController.text,
                         );
                         await DogsRecord.collection.doc().set(dogsCreateData);
-                        Navigator.pop(context);
+                        context.pop();
                       },
                       text: 'Add Pup',
                       options: FFButtonOptions(

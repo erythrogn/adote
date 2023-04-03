@@ -3,9 +3,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/main.dart';
-import '/pages/create_account/create_account_widget.dart';
-import '/pages/forgot_password/forgot_password_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -144,15 +141,15 @@ class _LoginWidgetState extends State<LoginWidget>
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
-                                  await Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 200),
-                                      reverseDuration:
-                                          Duration(milliseconds: 200),
-                                      child: CreateAccountWidget(),
-                                    ),
+                                  context.pushNamed(
+                                    'createAccount',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 200),
+                                      ),
+                                    },
                                   );
                                 },
                                 text: 'Criar Nova Conta',
@@ -339,13 +336,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 0.0, 12.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ForgotPasswordWidget(),
-                                  ),
-                                );
+                                context.pushNamed('forgotPassword');
                               },
                               text: 'Esqueceu a senha?',
                               options: FFButtonOptions(
@@ -379,6 +370,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                 0.0, 12.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                GoRouter.of(context).prepareAuthEvent();
+
                                 final user = await signInWithEmail(
                                   context,
                                   _model.emailController.text,
@@ -388,14 +381,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                   return;
                                 }
 
-                                await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        NavBarPage(initialPage: 'homePage'),
-                                  ),
-                                  (r) => false,
-                                );
+                                context.goNamedAuth('homePage', mounted);
                               },
                               text: 'Login',
                               options: FFButtonOptions(
@@ -429,18 +415,13 @@ class _LoginWidgetState extends State<LoginWidget>
                           EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          GoRouter.of(context).prepareAuthEvent();
                           final user = await signInAnonymously(context);
                           if (user == null) {
                             return;
                           }
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'homePage'),
-                            ),
-                            (r) => false,
-                          );
+
+                          context.goNamedAuth('homePage', mounted);
                         },
                         text: 'Continuar como convidado?',
                         options: FFButtonOptions(

@@ -370,8 +370,7 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                                                                 ),
                                                                 onPressed:
                                                                     () async {
-                                                                  Navigator.pop(
-                                                                      context);
+                                                                  context.pop();
                                                                 },
                                                               ),
                                                             ),

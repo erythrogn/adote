@@ -1,7 +1,5 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/create_post/create_post_widget.dart';
-import '/pages/create_story/create_story_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,14 +58,15 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
             child: InkWell(
               onTap: () async {
-                await Navigator.push(
-                  context,
-                  PageTransition(
-                    type: PageTransitionType.bottomToTop,
-                    duration: Duration(milliseconds: 200),
-                    reverseDuration: Duration(milliseconds: 200),
-                    child: CreateStoryWidget(),
-                  ),
+                context.pushNamed(
+                  'createStory',
+                  extra: <String, dynamic>{
+                    kTransitionInfoKey: TransitionInfo(
+                      hasTransition: true,
+                      transitionType: PageTransitionType.bottomToTop,
+                      duration: Duration(milliseconds: 200),
+                    ),
+                  },
                 );
               },
               child: Container(
@@ -183,14 +182,15 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
           ),
           InkWell(
             onTap: () async {
-              await Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.bottomToTop,
-                  duration: Duration(milliseconds: 200),
-                  reverseDuration: Duration(milliseconds: 200),
-                  child: CreatePostWidget(),
-                ),
+              context.pushNamed(
+                'createPost',
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.bottomToTop,
+                    duration: Duration(milliseconds: 200),
+                  ),
+                },
               );
             },
             child: Container(

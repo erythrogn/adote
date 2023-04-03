@@ -57,7 +57,7 @@ class _CreateGroupChatWidgetState extends State<CreateGroupChatWidget> {
             size: 24.0,
           ),
           onPressed: () async {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         title: Column(
@@ -311,13 +311,14 @@ class _CreateGroupChatWidgetState extends State<CreateGroupChatWidget> {
                         .map((e) => e.reference)
                         .toList(),
                   );
-                  await Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatPageWidget(
-                        chatRef: _model.groupChat?.reference,
+                  context.pushNamed(
+                    'chatPage',
+                    queryParams: {
+                      'chatRef': serializeParam(
+                        _model.groupChat?.reference,
+                        ParamType.DocumentReference,
                       ),
-                    ),
+                    }.withoutNulls,
                   );
 
                   setState(() {});

@@ -46,7 +46,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
-            Navigator.pop(context);
+            context.pop();
           },
           child: Icon(
             Icons.arrow_back_rounded,

@@ -10,7 +10,6 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
-import '/main.dart';
 import 'dart:io';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,7 +72,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
-                Navigator.pop(context);
+                context.pop();
               },
             ),
           ),
@@ -375,14 +374,16 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                   await UserPostsRecord.collection
                       .doc()
                       .set(userPostsCreateData);
-                  await Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.leftToRight,
-                      duration: Duration(milliseconds: 250),
-                      reverseDuration: Duration(milliseconds: 250),
-                      child: NavBarPage(initialPage: 'homePage'),
-                    ),
+
+                  context.pushNamed(
+                    'homePage',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.leftToRight,
+                        duration: Duration(milliseconds: 250),
+                      ),
+                    },
                   );
                 },
                 text: 'Create Post',

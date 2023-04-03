@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,14 +59,16 @@ class _DeletePostWidgetState extends State<DeletePostWidget> {
             FFButtonWidget(
               onPressed: () async {
                 await widget.postParameters!.reference.delete();
-                await Navigator.push(
-                  context,
-                  PageTransition(
-                    type: PageTransitionType.leftToRight,
-                    duration: Duration(milliseconds: 220),
-                    reverseDuration: Duration(milliseconds: 220),
-                    child: NavBarPage(initialPage: 'homePage'),
-                  ),
+
+                context.pushNamed(
+                  'homePage',
+                  extra: <String, dynamic>{
+                    kTransitionInfoKey: TransitionInfo(
+                      hasTransition: true,
+                      transitionType: PageTransitionType.leftToRight,
+                      duration: Duration(milliseconds: 220),
+                    ),
+                  },
                 );
               },
               text: 'Delete Post',
@@ -93,7 +94,7 @@ class _DeletePostWidgetState extends State<DeletePostWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  Navigator.pop(context);
+                  context.pop();
                 },
                 text: 'Cancel',
                 options: FFButtonOptions(

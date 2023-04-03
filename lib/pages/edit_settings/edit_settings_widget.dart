@@ -5,9 +5,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/change_password/change_password_widget.dart';
-import '/pages/edit_user_profile/edit_user_profile_widget.dart';
-import '/pages/login/login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -124,7 +121,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget>
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  Navigator.pop(context);
+                  context.pop();
                 },
               ),
             ],
@@ -413,12 +410,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget>
                       ),
                       child: InkWell(
                         onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditUserProfileWidget(),
-                            ),
-                          );
+                          context.pushNamed('editUserProfile');
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -455,12 +447,7 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget>
                     ),
                     child: InkWell(
                       onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChangePasswordWidget(),
-                          ),
-                        );
+                        context.pushNamed('changePassword');
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -497,14 +484,11 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget>
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
+                        GoRouter.of(context).prepareAuthEvent();
                         await signOut();
-                        await Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginWidget(),
-                          ),
-                          (r) => false,
-                        );
+                        GoRouter.of(context).clearRedirectLocation();
+
+                        context.goNamedAuth('login', mounted);
                       },
                       text: 'Log Out',
                       options: FFButtonOptions(

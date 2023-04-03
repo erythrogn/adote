@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -414,14 +413,8 @@ class _CreateYourProfileWidgetState extends State<CreateYourProfileWidget> {
                             bio: _model.bioController.text,
                           );
                           await currentUserReference!.update(usersUpdateData);
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'homePage'),
-                            ),
-                            (r) => false,
-                          );
+
+                          context.goNamed('homePage');
                         },
                         text: 'Complete Setup',
                         options: FFButtonOptions(

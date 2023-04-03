@@ -128,7 +128,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                         size: 24.0,
                                       ),
                                       onPressed: () async {
-                                        Navigator.pop(context);
+                                        context.pop();
                                       },
                                     ),
                                   ),

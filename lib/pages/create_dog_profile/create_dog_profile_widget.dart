@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/pages/create_your_profile/create_your_profile_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -409,14 +408,7 @@ class _CreateDogProfileWidgetState extends State<CreateDogProfileWidget> {
                               0.0, 0.0, 20.0, 40.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateYourProfileWidget(),
-                                ),
-                                (r) => false,
-                              );
+                              context.goNamed('createYourProfile');
                             },
                             text: 'Skip',
                             options: FFButtonOptions(
@@ -458,14 +450,8 @@ class _CreateDogProfileWidgetState extends State<CreateDogProfileWidget> {
                               await DogsRecord.collection
                                   .doc()
                                   .set(dogsCreateData);
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateYourProfileWidget(),
-                                ),
-                                (r) => false,
-                              );
+
+                              context.goNamed('createYourProfile');
                             },
                             text: 'Save & Continue',
                             options: FFButtonOptions(

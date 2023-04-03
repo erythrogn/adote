@@ -3,8 +3,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/create_dog_profile/create_dog_profile_widget.dart';
-import '/pages/login/login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -152,15 +150,17 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                 Expanded(
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      await Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type: PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 200),
-                                          reverseDuration:
-                                              Duration(milliseconds: 200),
-                                          child: LoginWidget(),
-                                        ),
+                                      context.pushNamed(
+                                        'login',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 200),
+                                          ),
+                                        },
                                       );
                                     },
                                     text: 'Login',
@@ -351,6 +351,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                   0.0, 12.0, 75.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  GoRouter.of(context).prepareAuthEvent();
+
                                   final user = await createAccountWithEmail(
                                     context,
                                     _model.emailController.text,
@@ -360,14 +362,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                     return;
                                   }
 
-                                  await Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CreateDogProfileWidget(),
-                                    ),
-                                    (r) => false,
-                                  );
+                                  context.goNamedAuth(
+                                      'createDogProfile', mounted);
                                 },
                                 text: 'Create Account',
                                 options: FFButtonOptions(
@@ -401,14 +397,15 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                             EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            await Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 200),
-                                reverseDuration: Duration(milliseconds: 200),
-                                child: CreateAccountWidget(),
-                              ),
+                            context.pushNamed(
+                              'createAccount',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 200),
+                                ),
+                              },
                             );
                           },
                           text: 'Continuar como convidado?',

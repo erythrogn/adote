@@ -5,10 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/create_dog_profile_new/create_dog_profile_new_widget.dart';
-import '/pages/edit_dog_profile/edit_dog_profile_widget.dart';
-import '/pages/edit_settings/edit_settings_widget.dart';
-import '/pages/post_details/post_details_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -193,14 +189,15 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.bottomToTop,
-                              duration: Duration(milliseconds: 250),
-                              reverseDuration: Duration(milliseconds: 250),
-                              child: CreateDogProfileNewWidget(),
-                            ),
+                          context.pushNamed(
+                            'createDogProfile_New',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.bottomToTop,
+                                duration: Duration(milliseconds: 250),
+                              ),
+                            },
                           );
                         },
                         text: 'adicionar pet',
@@ -228,14 +225,15 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.bottomToTop,
-                              duration: Duration(milliseconds: 250),
-                              reverseDuration: Duration(milliseconds: 250),
-                              child: EditSettingsWidget(),
-                            ),
+                          context.pushNamed(
+                            'editSettings',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.bottomToTop,
+                                duration: Duration(milliseconds: 250),
+                              ),
+                            },
                           );
                         },
                         text: 'configurações',
@@ -467,15 +465,20 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                       size: 24.0,
                                                     ),
                                                     onPressed: () async {
-                                                      await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              EditDogProfileWidget(
-                                                            dogProfile:
-                                                                listViewDogsRecord,
+                                                      context.pushNamed(
+                                                        'editDogProfile',
+                                                        queryParams: {
+                                                          'dogProfile':
+                                                              serializeParam(
+                                                            listViewDogsRecord,
+                                                            ParamType.Document,
                                                           ),
-                                                        ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'dogProfile':
+                                                              listViewDogsRecord,
+                                                        },
                                                       );
                                                     },
                                                   ),
@@ -587,18 +590,26 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                 ),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PostDetailsWidget(
-                                                          userRecord:
-                                                              userPostUsersRecord,
-                                                          postReference:
-                                                              socialFeedUserPostsRecord
-                                                                  .reference,
+                                                    context.pushNamed(
+                                                      'postDetails',
+                                                      queryParams: {
+                                                        'userRecord':
+                                                            serializeParam(
+                                                          userPostUsersRecord,
+                                                          ParamType.Document,
                                                         ),
-                                                      ),
+                                                        'postReference':
+                                                            serializeParam(
+                                                          socialFeedUserPostsRecord
+                                                              .reference,
+                                                          ParamType
+                                                              .DocumentReference,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'userRecord':
+                                                            userPostUsersRecord,
+                                                      },
                                                     );
                                                   },
                                                   child: Column(

@@ -86,7 +86,7 @@ class _EditDogProfileWidgetState extends State<EditDogProfileWidget> {
                 size: 24.0,
               ),
               onPressed: () async {
-                Navigator.pop(context);
+                context.pop();
               },
             ),
             title: Text(
@@ -450,7 +450,7 @@ class _EditDogProfileWidgetState extends State<EditDogProfileWidget> {
                                   );
                                   await widget.dogProfile!.reference
                                       .update(dogsUpdateData);
-                                  Navigator.pop(context);
+                                  context.pop();
                                 },
                                 text: 'Save Changes',
                                 options: FFButtonOptions(
